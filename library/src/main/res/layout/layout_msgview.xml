@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.grallopmark.tablayout.widget.MsgView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mv="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rtv_msg_tip"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:textColor="@color/msgView_textColor"
+    android:textSize="@dimen/msgView_textSize"
+    android:visibility="gone"
+    mv:mv_backgroundColor="@color/msgView_background"
+    mv:mv_isRadiusHalfHeight="true"
+    mv:mv_strokeColor="@color/msgView_strokeColor"
+    mv:mv_strokeWidth="@dimen/msgView_strokeWidth" />
