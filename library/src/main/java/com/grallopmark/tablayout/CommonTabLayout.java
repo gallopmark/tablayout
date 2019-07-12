@@ -209,10 +209,10 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
         mTabWidth = ta.getDimension(R.styleable.CommonTabLayout_tl_tab_width, dp2px(-1));
 
 //        mTabPadding = ta.getDimension(R.styleable.CommonTabLayout_tl_tab_padding, mTabSpaceEqual || mTabWidth > 0 ? dp2px(0) : dp2px(10));
-        mTabPaddingStart = ta.getDimension(R.styleable.CommonTabLayout_tl_tab_paddingStart, mTabSpaceEqual || mTabWidth > 0 ? 0 : DensityUtil.dp2px(context, 10));
-        mTabPaddingEnd = ta.getDimension(R.styleable.CommonTabLayout_tl_tab_paddingEnd, mTabSpaceEqual || mTabWidth > 0 ? 0 : DensityUtil.dp2px(context, 10));
-        mTabPaddingTop = ta.getDimension(R.styleable.CommonTabLayout_tl_tab_paddingTop, mTabSpaceEqual || mTabWidth > 0 ? 0 : DensityUtil.dp2px(context, 5));
-        mTabPaddingBottom = ta.getDimension(R.styleable.CommonTabLayout_tl_tab_paddingBottom, mTabSpaceEqual || mTabWidth > 0 ? 0 : DensityUtil.dp2px(context, 5));
+        mTabPaddingStart = ta.getDimension(R.styleable.CommonTabLayout_tl_tab_paddingStart, mTabSpaceEqual || mTabWidth > 0 ? 0 : 0);
+        mTabPaddingEnd = ta.getDimension(R.styleable.CommonTabLayout_tl_tab_paddingEnd, mTabSpaceEqual || mTabWidth > 0 ? 0 : 0);
+        mTabPaddingTop = ta.getDimension(R.styleable.CommonTabLayout_tl_tab_paddingTop, mTabSpaceEqual || mTabWidth > 0 ? 0 : 0);
+        mTabPaddingBottom = ta.getDimension(R.styleable.CommonTabLayout_tl_tab_paddingBottom, mTabSpaceEqual || mTabWidth > 0 ? 0 : 0);
         mTabPadding = ta.getDimension(R.styleable.CommonTabLayout_tl_tab_padding, mTabSpaceEqual || mTabWidth > 0 ? 0 : 0);
         if (mTabPadding != 0) {
             mTabPaddingStart = mTabPadding;
@@ -633,8 +633,8 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
         invalidate();
     }
 
-    public void setTextsize(float textsize) {
-        this.mTextSize = sp2px(textsize);
+    public void setTextSize(float textsize) {
+        this.mTextSize = textsize;
         updateTabStyles();
     }
 

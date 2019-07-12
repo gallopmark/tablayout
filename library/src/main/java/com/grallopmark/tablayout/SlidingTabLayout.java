@@ -181,10 +181,10 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
         mTextAllCaps = ta.getBoolean(R.styleable.SlidingTabLayout_tl_textAllCaps, false);
         mTabSpaceEqual = ta.getBoolean(R.styleable.SlidingTabLayout_tl_tab_space_equal, false);
         mTabWidth = ta.getDimension(R.styleable.SlidingTabLayout_tl_tab_width, DensityUtil.dp2px(context, -1));
-        mTabPaddingStart = ta.getDimension(R.styleable.SlidingTabLayout_tl_tab_paddingStart, mTabSpaceEqual || mTabWidth > 0 ? 0 : DensityUtil.dp2px(context, 10));
-        mTabPaddingEnd = ta.getDimension(R.styleable.SlidingTabLayout_tl_tab_paddingEnd, mTabSpaceEqual || mTabWidth > 0 ? 0 : DensityUtil.dp2px(context, 10));
-        mTabPaddingTop = ta.getDimension(R.styleable.SlidingTabLayout_tl_tab_paddingTop, mTabSpaceEqual || mTabWidth > 0 ? 0 : DensityUtil.dp2px(context, 5));
-        mTabPaddingBottom = ta.getDimension(R.styleable.SlidingTabLayout_tl_tab_paddingBottom, mTabSpaceEqual || mTabWidth > 0 ? 0 : DensityUtil.dp2px(context, 5));
+        mTabPaddingStart = ta.getDimension(R.styleable.SlidingTabLayout_tl_tab_paddingStart, mTabSpaceEqual || mTabWidth > 0 ? 0 : 0);
+        mTabPaddingEnd = ta.getDimension(R.styleable.SlidingTabLayout_tl_tab_paddingEnd, mTabSpaceEqual || mTabWidth > 0 ? 0 : 0);
+        mTabPaddingTop = ta.getDimension(R.styleable.SlidingTabLayout_tl_tab_paddingTop, mTabSpaceEqual || mTabWidth > 0 ? 0 : 0);
+        mTabPaddingBottom = ta.getDimension(R.styleable.SlidingTabLayout_tl_tab_paddingBottom, mTabSpaceEqual || mTabWidth > 0 ? 0 : 0);
         mTabPadding = ta.getDimension(R.styleable.SlidingTabLayout_tl_tab_padding, mTabSpaceEqual || mTabWidth > 0 ? 0 : 0);
         if (mTabPadding != 0) {
             mTabPaddingStart = mTabPadding;
