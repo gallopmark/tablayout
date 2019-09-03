@@ -110,8 +110,8 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
     private static final int TEXT_BOLD_WHEN_SELECT = 1;
     private static final int TEXT_BOLD_BOTH = 2;
     private float mTextSize;
-    private int mTextSelectColor;
-    private int mTextUnSelectColor;
+    private int mTextSelectedColor;
+    private int mTextUnselectedColor;
     private int mTextBold;
     private boolean mTextAllCaps;
 
@@ -175,8 +175,8 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
         mDividerWidth = ta.getDimension(R.styleable.SlidingTabLayout_tl_divider_width, 0);
         mDividerPadding = ta.getDimension(R.styleable.SlidingTabLayout_tl_divider_padding, DensityUtil.dp2px(context, 12));
         mTextSize = ta.getDimension(R.styleable.SlidingTabLayout_tl_textSize, DensityUtil.sp2px(context, 14));
-        mTextSelectColor = ta.getColor(R.styleable.SlidingTabLayout_tl_textSelectColor, Color.parseColor("#ffffff"));
-        mTextUnSelectColor = ta.getColor(R.styleable.SlidingTabLayout_tl_textUnselectColor, Color.parseColor("#AAffffff"));
+        mTextSelectedColor = ta.getColor(R.styleable.SlidingTabLayout_tl_textSelectColor, Color.parseColor("#ffffff"));
+        mTextUnselectedColor = ta.getColor(R.styleable.SlidingTabLayout_tl_textUnselectColor, Color.parseColor("#AAffffff"));
         mTextBold = ta.getInt(R.styleable.SlidingTabLayout_tl_textBold, TEXT_BOLD_NONE);
         mTextAllCaps = ta.getBoolean(R.styleable.SlidingTabLayout_tl_textAllCaps, false);
         mTabSpaceEqual = ta.getBoolean(R.styleable.SlidingTabLayout_tl_tab_space_equal, false);
@@ -206,13 +206,13 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
      * 关联ViewPager,用于不想在ViewPager适配器中设置titles数据的情况
      */
     public void setupViewPager(@NonNull ViewPager vp, @NonNull String[] titles) {
-        if (vp.getAdapter() == null) {
-            vp.setAdapter(new DefaultPagerAdapter(titles.length));
+        this.mViewPager = vp;
+        if (mViewPager.getAdapter() == null) {
+            mViewPager.setAdapter(new DefaultPagerAdapter(titles.length));
         }
-        if (titles.length != vp.getAdapter().getCount()) {
+        if (titles.length != mViewPager.getAdapter().getCount()) {
             throw new IllegalStateException("Titles length must be the same as the page count !");
         }
-        this.mViewPager = vp;
         mTitles = new ArrayList<>();
         Collections.addAll(mTitles, titles);
         this.mViewPager.removeOnPageChangeListener(this);
@@ -311,7 +311,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
 //            v.setPadding((int) mTabPadding, v.getPaddingTop(), (int) mTabPadding, v.getPaddingBottom());
             TextView tv_tab_title = v.findViewById(R.id.tv_tab_title);
             if (tv_tab_title != null) {
-                tv_tab_title.setTextColor(i == mCurrentTab ? mTextSelectColor : mTextUnSelectColor);
+                tv_tab_title.setTextColor(i == mCurrentTab ? mTextSelectedColor : mTextUnselectedColor);
                 tv_tab_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
                 tv_tab_title.setPadding((int) mTabPaddingStart, (int) mTabPaddingTop, (int) mTabPaddingEnd, (int) mTabPaddingBottom);
 //                tv_tab_title.setPadding((int) mTabPadding, 0, (int) mTabPadding, 0);
@@ -381,7 +381,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
             final boolean isSelect = i == position;
             TextView tab_title = tabView.findViewById(R.id.tv_tab_title);
             if (tab_title != null) {
-                tab_title.setTextColor(isSelect ? mTextSelectColor : mTextUnSelectColor);
+                tab_title.setTextColor(isSelect ? mTextSelectedColor : mTextUnselectedColor);
                 if (mTextBold == TEXT_BOLD_WHEN_SELECT) {
                     tab_title.getPaint().setFakeBoldText(isSelect);
                 }
@@ -533,7 +533,6 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
     public void setCurrentTab(int currentTab) {
         this.mCurrentTab = currentTab;
         mViewPager.setCurrentItem(currentTab);
-
     }
 
     public void setCurrentTab(int currentTab, boolean smoothScroll) {
@@ -659,12 +658,12 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
     }
 
     public void setTextSelectColor(int textSelectColor) {
-        this.mTextSelectColor = textSelectColor;
+        this.mTextSelectedColor = textSelectColor;
         updateTabStyles();
     }
 
     public void setTextUnselectColor(int textUnselectColor) {
-        this.mTextUnSelectColor = textUnselectColor;
+        this.mTextUnselectedColor = textUnselectColor;
         updateTabStyles();
     }
 
@@ -780,11 +779,11 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
     }
 
     public int getTextSelectColor() {
-        return mTextSelectColor;
+        return mTextSelectedColor;
     }
 
-    public int getTextUnselectColor() {
-        return mTextUnSelectColor;
+    public int getTextUnselectedColor() {
+        return mTextUnselectedColor;
     }
 
     public int getTextBold() {
