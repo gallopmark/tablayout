@@ -1,8 +1,6 @@
-package com.grallopmark.tablayout;
+package pony.xcode.tablayout;
 
 import androidx.annotation.DrawableRes;
-
-import com.grallopmark.tablayout.listener.CustomTabEntity;
 
 public class TabEntity implements CustomTabEntity {
     private String mTabTitle;

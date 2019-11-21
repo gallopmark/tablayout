@@ -1,4 +1,4 @@
-package com.grallopmark.tablayout;
+package pony.xcode.tablayout;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -30,9 +30,10 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 
-import com.grallopmark.tablayout.listener.OnTabSelectListener;
-import com.grallopmark.tablayout.utils.UnreadMsgUtils;
-import com.grallopmark.tablayout.widget.MsgView;
+import com.grallopmark.tablayout.R;
+
+import pony.xcode.tablayout.utils.UnreadMsgUtils;
+import pony.xcode.tablayout.widget.MsgView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -335,7 +336,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
          */
         this.mCurrentTab = position;
         this.mCurrentPositionOffset = positionOffset;
-        scrollToCurrentTab();
+//        scrollToCurrentTab();
         invalidate();
     }
 
@@ -481,7 +482,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
                 mTrianglePaint.setColor(mIndicatorColor);
                 mTrianglePath.reset();
                 mTrianglePath.moveTo(paddingLeft + mIndicatorRect.left, height);
-                mTrianglePath.lineTo(paddingLeft + mIndicatorRect.left / 2 + mIndicatorRect.right / 2, height - mIndicatorHeight);
+                mTrianglePath.lineTo(paddingLeft + mIndicatorRect.left / 2f + mIndicatorRect.right / 2f, height - mIndicatorHeight);
                 mTrianglePath.lineTo(paddingLeft + mIndicatorRect.right, height);
                 mTrianglePath.close();
                 canvas.drawPath(mTrianglePath, mTrianglePaint);
@@ -527,6 +528,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
                 mIndicatorDrawable.draw(canvas);
             }
         }
+        scrollToCurrentTab();
     }
 
     //setter and getter

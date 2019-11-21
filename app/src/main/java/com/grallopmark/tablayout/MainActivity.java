@@ -6,8 +6,12 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.grallopmark.tablayout.listener.CustomTabEntity;
-import com.grallopmark.tablayout.listener.OnTabSelectListener;
+import pony.xcode.tablayout.CommonTabLayout;
+import pony.xcode.tablayout.SegmentTabLayout;
+import pony.xcode.tablayout.SlidingTabLayout;
+import pony.xcode.tablayout.TabEntity;
+import pony.xcode.tablayout.CustomTabEntity;
+import pony.xcode.tablayout.OnTabSelectListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
         list.add("设置");
         list.add("钱包");
         list.add("微粒贷");
+        list.add("摩拜");
+        list.add("哈啰");
+        list.add("滴滴");
 //        mViewPager.setAdapter(new PagerAdapter() {
 //            @Override
 //            public int getCount() {
@@ -85,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
         tabLayout.setupViewPager(mViewPager, list.toArray(new String[0]));
+        tabLayout.setCurrentTab(6);
         tabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
