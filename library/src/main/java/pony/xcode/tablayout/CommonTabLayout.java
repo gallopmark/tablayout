@@ -28,10 +28,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-
-
-import com.grallopmark.tablayout.R;
-
 import pony.xcode.tablayout.utils.FragmentChangeManager;
 import pony.xcode.tablayout.utils.UnreadMsgUtils;
 import pony.xcode.tablayout.widget.MsgView;

@@ -29,9 +29,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-
-import com.grallopmark.tablayout.R;
-
 import pony.xcode.tablayout.utils.UnreadMsgUtils;
 import pony.xcode.tablayout.widget.MsgView;
 

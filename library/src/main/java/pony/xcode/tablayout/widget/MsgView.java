@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.core.view.ViewCompat;
 
-import com.grallopmark.tablayout.R;
+import pony.xcode.tablayout.R;
 
 
 /**
