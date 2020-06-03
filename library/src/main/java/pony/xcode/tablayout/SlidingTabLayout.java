@@ -117,6 +117,8 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
     private int mHeight;
     private boolean mSnapOnTabClick;
 
+    private float mMsgTextSize;
+
     public SlidingTabLayout(Context context) {
         this(context, null, 0);
     }
@@ -190,6 +192,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
             mTabPaddingTop = mTabPadding;
             mTabPaddingBottom = mTabPadding;
         }
+        mMsgTextSize = ta.getDimension(R.styleable.SlidingTabLayout_tl_tab_msg_textSize, context.getResources().getDimension(R.dimen.msgView_textSize));
         ta.recycle();
     }
 
@@ -820,6 +823,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
         MsgView tipView = tabView.findViewById(R.id.rtv_msg_tip);
         if (tipView != null) {
             UnreadMsgUtils.show(tipView, num);
+            tipView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mMsgTextSize);
             if (mInitSetMap.get(position) != null && mInitSetMap.get(position)) {
                 return;
             }

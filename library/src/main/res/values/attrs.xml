@@ -120,7 +120,7 @@
         <attr name="tl_textUnselectColor" />
         <attr name="tl_textBold" />
         <attr name="tl_textAllCaps" />
-
+        <attr name="tl_tab_msg_textSize" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="CommonTabLayout">
@@ -181,7 +181,7 @@
         </attr>
         <!-- 设置icon与文字间距 -->
         <attr name="tl_iconMargin" format="dimension" />
-
+        <attr name="tl_tab_msg_textSize" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="SegmentTabLayout">
@@ -221,7 +221,7 @@
         <attr name="tl_bar_color" format="color" />
         <attr name="tl_bar_stroke_color" format="color" />
         <attr name="tl_bar_stroke_width" format="dimension" />
-
+        <attr name="tl_tab_msg_textSize" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="MsgView">

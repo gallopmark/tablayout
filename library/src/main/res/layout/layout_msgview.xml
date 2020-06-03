@@ -10,5 +10,5 @@
     android:visibility="gone"
     mv:mv_backgroundColor="@color/msgView_background"
     mv:mv_isRadiusHalfHeight="true"
-    mv:mv_strokeColor="@color/msgView_strokeColor"
-    mv:mv_strokeWidth="@dimen/msgView_strokeWidth" />
+    mv:mv_strokeWidth="@dimen/msgView_strokeWidth"
+    mv:mv_strokeColor="@color/msgView_strokeColor" />

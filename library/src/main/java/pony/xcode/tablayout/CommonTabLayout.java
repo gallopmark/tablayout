@@ -28,6 +28,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+
 import pony.xcode.tablayout.utils.FragmentChangeManager;
 import pony.xcode.tablayout.utils.UnreadMsgUtils;
 import pony.xcode.tablayout.widget.MsgView;
@@ -120,6 +121,8 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
     private float mIconMargin;
 
     private int mHeight;
+
+    private float mMsgTextSize;
 
     /**
      * anim
@@ -216,6 +219,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
             mTabPaddingTop = mTabPadding;
             mTabPaddingBottom = mTabPadding;
         }
+        mMsgTextSize = ta.getDimension(R.styleable.CommonTabLayout_tl_tab_msg_textSize, context.getResources().getDimension(R.dimen.msgView_textSize));
         ta.recycle();
     }
 
@@ -855,6 +859,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
         View tabView = mTabsContainer.getChildAt(position);
         MsgView tipView = tabView.findViewById(R.id.rtv_msg_tip);
         if (tipView != null) {
+            tipView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mMsgTextSize);
             UnreadMsgUtils.show(tipView, num);
 
             if (mInitSetMap.get(position) != null && mInitSetMap.get(position)) {

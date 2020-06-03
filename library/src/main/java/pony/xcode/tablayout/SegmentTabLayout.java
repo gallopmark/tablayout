@@ -96,6 +96,7 @@ public class SegmentTabLayout extends FrameLayout implements ValueAnimator.Anima
 
     private int mHeight;
 
+    private float mMsgTextSize;
     /**
      * anim
      */
@@ -178,7 +179,7 @@ public class SegmentTabLayout extends FrameLayout implements ValueAnimator.Anima
         mBarColor = ta.getColor(R.styleable.SegmentTabLayout_tl_bar_color, Color.TRANSPARENT);
         mBarStrokeColor = ta.getColor(R.styleable.SegmentTabLayout_tl_bar_stroke_color, mIndicatorColor);
         mBarStrokeWidth = ta.getDimension(R.styleable.SegmentTabLayout_tl_bar_stroke_width, DensityUtil.dp2px(context, 1));
-
+        mMsgTextSize = ta.getDimension(R.styleable.SegmentTabLayout_tl_tab_msg_textSize, context.getResources().getDimension(R.dimen.msgView_textSize));
         ta.recycle();
     }
 
@@ -687,6 +688,7 @@ public class SegmentTabLayout extends FrameLayout implements ValueAnimator.Anima
         View tabView = mTabsContainer.getChildAt(position);
         MsgView tipView = tabView.findViewById(R.id.rtv_msg_tip);
         if (tipView != null) {
+            tipView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mMsgTextSize);
             UnreadMsgUtils.show(tipView, num);
             if (mInitSetMap.get(position) != null && mInitSetMap.get(position)) {
                 return;

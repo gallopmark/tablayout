@@ -8,20 +8,20 @@
     <pony.xcode.tablayout.CommonTabLayout
         android:id="@+id/mCommonTabLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_gravity="center"
-        app:tl_iconVisible="false"
         app:tl_indicator_bounce_enable="false"
-        app:tl_indicator_color="@color/colorPrimaryDark"
+        app:tl_indicator_color="@color/colorAccent"
+        app:tl_indicator_corner_radius="2dp"
         app:tl_indicator_height="4dp"
         app:tl_indicator_width="32dp"
-        app:tl_tab_paddingBottom="10dp"
-        app:tl_tab_paddingTop="10dp"
+        app:tl_iconVisible="false"
         app:tl_tab_space_equal="true"
+        app:tl_tab_msg_textSize="12sp"
         app:tl_textBold="BOTH"
         app:tl_textSelectColor="@color/colorAccent"
         app:tl_textSize="16sp"
-        app:tl_textUnselectColor="@color/colorPrimary" />
+        app:tl_textUnselectColor="#cccccc" />
 
     <pony.xcode.tablayout.SegmentTabLayout
         android:id="@+id/mSegmentTabLayout"

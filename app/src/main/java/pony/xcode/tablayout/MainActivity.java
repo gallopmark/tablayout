@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         entities.add(new TabEntity("发现"));
         entities.add(new TabEntity("我"));
         mCommonTabLayout.setTabData(entities);
+        mCommonTabLayout.showMsg(1, 1);
         mCommonTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
