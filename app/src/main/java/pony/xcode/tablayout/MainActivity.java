@@ -8,13 +8,6 @@ import android.util.Log;
 
 import com.xcode.tablayout.R;
 
-import pony.xcode.tablayout.CommonTabLayout;
-import pony.xcode.tablayout.SegmentTabLayout;
-import pony.xcode.tablayout.SlidingTabLayout;
-import pony.xcode.tablayout.TabEntity;
-import pony.xcode.tablayout.CustomTabEntity;
-import pony.xcode.tablayout.OnTabSelectListener;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         entities.add(new TabEntity("发现"));
         entities.add(new TabEntity("我"));
         mCommonTabLayout.setTabData(entities);
-        mCommonTabLayout.showMsg(1, 1);
+        mCommonTabLayout.showMsg(1, 11);
         mCommonTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {

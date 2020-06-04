@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="msgView_textSize">10sp</dimen>
+    <dimen name="msgView_textSize">6sp</dimen>
     <dimen name="msgView_strokeWidth">1dp</dimen>
     <color name="msgView_textColor">#ffffff</color>
     <color name="msgView_strokeColor">#ffffff</color>

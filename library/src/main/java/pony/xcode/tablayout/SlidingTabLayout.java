@@ -17,6 +17,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,7 +31,6 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import pony.xcode.tablayout.utils.UnreadMsgUtils;
-import pony.xcode.tablayout.widget.MsgView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -117,6 +117,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
     private int mHeight;
     private boolean mSnapOnTabClick;
 
+    private int mMsgPadding;
     private float mMsgTextSize;
 
     public SlidingTabLayout(Context context) {
@@ -192,7 +193,8 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
             mTabPaddingTop = mTabPadding;
             mTabPaddingBottom = mTabPadding;
         }
-        mMsgTextSize = ta.getDimension(R.styleable.SlidingTabLayout_tl_tab_msg_textSize, context.getResources().getDimension(R.dimen.msgView_textSize));
+        mMsgPadding = ta.getDimensionPixelSize(R.styleable.SlidingTabLayout_tl_tab_msg_padding, DensityUtil.dp2px(context, 2));
+        mMsgTextSize = ta.getDimension(R.styleable.SlidingTabLayout_tl_tab_msg_textSize, DensityUtil.sp2px(context, 10));
         ta.recycle();
     }
 
@@ -820,14 +822,21 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
         }
 
         View tabView = mTabsContainer.getChildAt(position);
-        MsgView tipView = tabView.findViewById(R.id.rtv_msg_tip);
-        if (tipView != null) {
-            UnreadMsgUtils.show(tipView, num);
-            tipView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mMsgTextSize);
+        FrameLayout msgView = tabView.findViewById(R.id.msg_layout);
+        if (msgView != null) {
+            msgView.setPadding(mMsgPadding, mMsgPadding, mMsgPadding, mMsgPadding);
+            if (num > 0) {
+                msgView.setVisibility(View.VISIBLE);
+                TextView tipView = tabView.findViewById(R.id.rtv_msg_tip);
+                tipView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mMsgTextSize);
+                UnreadMsgUtils.show(tipView, num);
+            } else {
+                msgView.setVisibility(View.GONE);
+            }
             if (mInitSetMap.get(position) != null && mInitSetMap.get(position)) {
                 return;
             }
-            setMsgMargin(position, 4, 2);
+//            setMsgMargin(position, 4, 2);
             mInitSetMap.put(position, true);
         }
     }
@@ -853,9 +862,9 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
         }
 
         View tabView = mTabsContainer.getChildAt(position);
-        MsgView tipView = tabView.findViewById(R.id.rtv_msg_tip);
-        if (tipView != null) {
-            tipView.setVisibility(View.GONE);
+        FrameLayout msgView = tabView.findViewById(R.id.msg_layout);
+        if (msgView != null) {
+            msgView.setVisibility(View.GONE);
         }
     }
 
@@ -867,23 +876,24 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
             position = mTabCount - 1;
         }
         View tabView = mTabsContainer.getChildAt(position);
-        MsgView tipView = tabView.findViewById(R.id.rtv_msg_tip);
-        if (tipView != null) {
+        FrameLayout msgView = tabView.findViewById(R.id.msg_layout);
+        if (msgView != null) {
             TextView tv_tab_title = tabView.findViewById(R.id.tv_tab_title);
             mTextPaint.setTextSize(mTextSize);
             float textWidth = mTextPaint.measureText(tv_tab_title.getText().toString());
             float textHeight = mTextPaint.descent() - mTextPaint.ascent();
-            MarginLayoutParams lp = (MarginLayoutParams) tipView.getLayoutParams();
+            MarginLayoutParams lp = (MarginLayoutParams) msgView.getLayoutParams();
             lp.leftMargin = mTabWidth >= 0 ? (int) (mTabWidth / 2 + textWidth / 2 + leftPadding) : (int) (mTabPaddingStart + textWidth + leftPadding);
             lp.topMargin = mHeight > 0 ? (int) ((mHeight - textHeight) / 2 - bottomPadding) : 0;
-            tipView.setLayoutParams(lp);
+            msgView.setLayoutParams(lp);
         }
     }
 
     /**
      * 当前类只提供了少许设置未读消息属性的方法,可以通过该方法获取MsgView对象从而各种设置
      */
-    public MsgView getMsgView(int position) {
+    @Deprecated
+    public TextView getMsgView(int position) {
         if (position >= mTabCount) {
             position = mTabCount - 1;
         }
@@ -897,7 +907,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
         this.mOnTabSelectListener = listener;
     }
 
-    class DefaultPagerAdapter extends PagerAdapter {
+    static class DefaultPagerAdapter extends PagerAdapter {
         private int mSize;
 
         DefaultPagerAdapter(int size) {
@@ -928,7 +938,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
         }
     }
 
-    class InnerPagerAdapter extends FragmentPagerAdapter {
+    static class InnerPagerAdapter extends FragmentPagerAdapter {
         private ArrayList<Fragment> fragments;
         private String[] titles;
 

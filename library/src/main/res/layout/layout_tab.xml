@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:clipChildren="false"
     android:clipToPadding="false"
+    android:gravity="center"
     android:orientation="horizontal">
 
     <TextView
@@ -13,10 +14,5 @@
         android:gravity="center"
         android:singleLine="true" />
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-
-        <include layout="@layout/layout_msgview" />
-    </FrameLayout>
+    <include layout="@layout/layout_msgview" />
 </LinearLayout>

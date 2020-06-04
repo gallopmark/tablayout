@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="horizontal"
     android:clipChildren="false"
-    android:clipToPadding="false">
+    android:clipToPadding="false"
+    android:gravity="center"
+    android:orientation="horizontal">
 
     <LinearLayout
         android:id="@+id/ll_tap"
@@ -21,10 +21,5 @@
             android:singleLine="true" />
     </LinearLayout>
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-
-        <include layout="@layout/layout_msgview" />
-    </FrameLayout>
+    <include layout="@layout/layout_msgview" />
 </LinearLayout>

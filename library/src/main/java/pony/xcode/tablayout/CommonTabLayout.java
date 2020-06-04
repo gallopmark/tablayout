@@ -31,7 +31,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import pony.xcode.tablayout.utils.FragmentChangeManager;
 import pony.xcode.tablayout.utils.UnreadMsgUtils;
-import pony.xcode.tablayout.widget.MsgView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,6 +121,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
 
     private int mHeight;
 
+    private int mMsgPadding;
     private float mMsgTextSize;
 
     /**
@@ -219,7 +219,8 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
             mTabPaddingTop = mTabPadding;
             mTabPaddingBottom = mTabPadding;
         }
-        mMsgTextSize = ta.getDimension(R.styleable.CommonTabLayout_tl_tab_msg_textSize, context.getResources().getDimension(R.dimen.msgView_textSize));
+        mMsgPadding = ta.getDimensionPixelSize(R.styleable.CommonTabLayout_tl_tab_msg_padding, dp2px(2));
+        mMsgTextSize = ta.getDimension(R.styleable.CommonTabLayout_tl_tab_msg_textSize, sp2px(10));
         ta.recycle();
     }
 
@@ -857,21 +858,27 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
             position = mTabCount - 1;
         }
         View tabView = mTabsContainer.getChildAt(position);
-        MsgView tipView = tabView.findViewById(R.id.rtv_msg_tip);
-        if (tipView != null) {
-            tipView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mMsgTextSize);
-            UnreadMsgUtils.show(tipView, num);
-
+        FrameLayout msgView = tabView.findViewById(R.id.msg_layout);
+        if (msgView != null) {
+            msgView.setPadding(mMsgPadding, mMsgPadding, mMsgPadding, mMsgPadding);
+            if (num > 0) {
+                msgView.setVisibility(View.VISIBLE);
+                TextView tipView = tabView.findViewById(R.id.rtv_msg_tip);
+                tipView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mMsgTextSize);
+                UnreadMsgUtils.show(tipView, num);
+            } else {
+                msgView.setVisibility(View.GONE);
+            }
             if (mInitSetMap.get(position) != null && mInitSetMap.get(position)) {
                 return;
             }
 
-            if (!mIconVisible) {
-                setMsgMargin(position, 2, 2);
-            } else {
-                setMsgMargin(position, 0,
-                        mIconGravity == Gravity.LEFT || mIconGravity == Gravity.RIGHT ? 4 : 0);
-            }
+//            if (!mIconVisible) {
+//                setMsgMargin(position, 2, 2);
+//            } else {
+//                setMsgMargin(position, 0,
+//                        mIconGravity == Gravity.LEFT || mIconGravity == Gravity.RIGHT ? 4 : 0);
+//            }
             mInitSetMap.put(position, true);
         }
     }
@@ -894,9 +901,9 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
         }
 
         View tabView = mTabsContainer.getChildAt(position);
-        MsgView tipView = tabView.findViewById(R.id.rtv_msg_tip);
-        if (tipView != null) {
-            tipView.setVisibility(View.GONE);
+        FrameLayout msgView = tabView.findViewById(R.id.msg_layout);
+        if (msgView != null) {
+            msgView.setVisibility(View.GONE);
         }
     }
 
@@ -910,11 +917,11 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
             position = mTabCount - 1;
         }
         View tabView = mTabsContainer.getChildAt(position);
-        MsgView tipView = tabView.findViewById(R.id.rtv_msg_tip);
-        if (tipView != null) {
+        FrameLayout msgView = tabView.findViewById(R.id.msg_layout);
+        if (msgView != null) {
             mTextPaint.setTextSize(mTextSize);
             float textHeight = mTextPaint.descent() - mTextPaint.ascent();
-            MarginLayoutParams lp = (MarginLayoutParams) tipView.getLayoutParams();
+            MarginLayoutParams lp = (MarginLayoutParams) msgView.getLayoutParams();
 
             float iconH = mIconHeight;
             float margin = 0;
@@ -933,14 +940,15 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
                 lp.topMargin = mHeight > 0 ? (int) (mHeight - Math.max(textHeight, iconH)) / 2 - dp2px(bottomPadding) : dp2px(bottomPadding);
             }
 
-            tipView.setLayoutParams(lp);
+            msgView.setLayoutParams(lp);
         }
     }
 
     /**
      * 当前类只提供了少许设置未读消息属性的方法,可以通过该方法获取MsgView对象从而各种设置
      */
-    public MsgView getMsgView(int position) {
+    @Deprecated
+    public TextView getMsgView(int position) {
         if (position >= mTabCount) {
             position = mTabCount - 1;
         }

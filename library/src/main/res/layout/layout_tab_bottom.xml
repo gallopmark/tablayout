@@ -26,10 +26,6 @@
             android:layout_height="wrap_content" />
 
     </LinearLayout>
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
 
-        <include layout="@layout/layout_msgview" />
-    </FrameLayout>
+    <include layout="@layout/layout_msgview" />
 </LinearLayout>

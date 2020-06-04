@@ -1,11 +1,9 @@
 package pony.xcode.tablayout.utils;
 
 
-import android.util.DisplayMetrics;
-import android.view.View;
+import android.util.TypedValue;
 import android.widget.FrameLayout;
-
-import pony.xcode.tablayout.widget.MsgView;
+import android.widget.TextView;
 
 
 /**
@@ -16,39 +14,27 @@ import pony.xcode.tablayout.widget.MsgView;
  */
 public class UnreadMsgUtils {
 
-    public static void show(MsgView msgView, int num) {
+    public static void show(TextView msgView, int num) {
         if (msgView == null) {
             return;
         }
-        FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) msgView.getLayoutParams();
-        DisplayMetrics dm = msgView.getResources().getDisplayMetrics();
-        msgView.setVisibility(View.VISIBLE);
         if (num <= 0) {//圆点,设置默认宽高
-            msgView.setStrokeWidth(0);
             msgView.setText("");
-            lp.width = (int) (5 * dm.density);
-            lp.height = (int) (5 * dm.density);
-            msgView.setLayoutParams(lp);
         } else {
-            lp.height = (int) (18 * dm.density);
             if (num < 10) {//圆
-                lp.width = (int) (18 * dm.density);
                 msgView.setText(String.valueOf(num));
             } else if (num < 100) {//圆角矩形,圆角是高度的一半,设置默认padding
-                lp.width = FrameLayout.LayoutParams.WRAP_CONTENT;
-                msgView.setPadding((int) (6 * dm.density), 0, (int) (6 * dm.density), 0);
                 msgView.setText(String.valueOf(num));
             } else {//数字超过两位,显示99+
-                lp.width = FrameLayout.LayoutParams.WRAP_CONTENT;
-                msgView.setPadding((int) (6 * dm.density), 0, (int) (6 * dm.density), 0);
                 String over99 = "99+";
                 msgView.setText(over99);
+                //字体缩小
+                msgView.setTextSize(TypedValue.COMPLEX_UNIT_PX, msgView.getTextSize() / 1.2f);
             }
-            msgView.setLayoutParams(lp);
         }
     }
 
-    public static void setSize(MsgView rtv, int size) {
+    public static void setSize(TextView rtv, int size) {
         if (rtv == null) {
             return;
         }

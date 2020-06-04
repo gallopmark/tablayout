@@ -17,22 +17,17 @@
         <TextView
             android:id="@+id/tv_tab_title"
             android:layout_width="wrap_content"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:singleLine="true" />
 
         <ImageView
             android:id="@+id/iv_tab_icon"
             android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
 
     </LinearLayout>
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-
-        <include layout="@layout/layout_msgview" />
-    </FrameLayout>
+    <include layout="@layout/layout_msgview" />
 </LinearLayout>

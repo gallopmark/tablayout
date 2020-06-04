@@ -80,6 +80,7 @@
     </attr>
     <!-- 设置字体全大写 -->
     <attr name="tl_textAllCaps" format="boolean" />
+    <attr name="tl_tab_msg_padding" format="dimension" />
     <attr name="tl_tab_msg_textSize" format="dimension" />
     <declare-styleable name="SlidingTabLayout">
         <!-- indicator -->
@@ -120,6 +121,8 @@
         <attr name="tl_textUnselectColor" />
         <attr name="tl_textBold" />
         <attr name="tl_textAllCaps" />
+
+        <attr name="tl_tab_msg_padding" />
         <attr name="tl_tab_msg_textSize" />
     </declare-styleable>
 
@@ -181,6 +184,7 @@
         </attr>
         <!-- 设置icon与文字间距 -->
         <attr name="tl_iconMargin" format="dimension" />
+        <attr name="tl_tab_msg_padding" />
         <attr name="tl_tab_msg_textSize" />
     </declare-styleable>
 
@@ -221,21 +225,8 @@
         <attr name="tl_bar_color" format="color" />
         <attr name="tl_bar_stroke_color" format="color" />
         <attr name="tl_bar_stroke_width" format="dimension" />
-        <attr name="tl_tab_msg_textSize" />
-    </declare-styleable>
 
-    <declare-styleable name="MsgView">
-        <!-- 圆角矩形背景色 -->
-        <attr name="mv_backgroundColor" format="color" />
-        <!-- 圆角弧度,单位dp-->
-        <attr name="mv_cornerRadius" format="dimension" />
-        <!-- 圆角弧度,单位dp-->
-        <attr name="mv_strokeWidth" format="dimension" />
-        <!-- 圆角边框颜色-->
-        <attr name="mv_strokeColor" format="color" />
-        <!-- 圆角弧度是高度一半-->
-        <attr name="mv_isRadiusHalfHeight" format="boolean" />
-        <!-- 圆角矩形宽高相等,取较宽高中大值-->
-        <attr name="mv_isWidthHeightEqual" format="boolean" />
+        <attr name="tl_tab_msg_padding" />
+        <attr name="tl_tab_msg_textSize" />
     </declare-styleable>
 </resources>

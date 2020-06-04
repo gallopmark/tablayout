@@ -28,7 +28,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import pony.xcode.tablayout.utils.FragmentChangeManager;
 import pony.xcode.tablayout.utils.UnreadMsgUtils;
-import pony.xcode.tablayout.widget.MsgView;
 
 import java.util.ArrayList;
 
@@ -96,6 +95,7 @@ public class SegmentTabLayout extends FrameLayout implements ValueAnimator.Anima
 
     private int mHeight;
 
+    private int mMsgPadding;
     private float mMsgTextSize;
     /**
      * anim
@@ -179,7 +179,8 @@ public class SegmentTabLayout extends FrameLayout implements ValueAnimator.Anima
         mBarColor = ta.getColor(R.styleable.SegmentTabLayout_tl_bar_color, Color.TRANSPARENT);
         mBarStrokeColor = ta.getColor(R.styleable.SegmentTabLayout_tl_bar_stroke_color, mIndicatorColor);
         mBarStrokeWidth = ta.getDimension(R.styleable.SegmentTabLayout_tl_bar_stroke_width, DensityUtil.dp2px(context, 1));
-        mMsgTextSize = ta.getDimension(R.styleable.SegmentTabLayout_tl_tab_msg_textSize, context.getResources().getDimension(R.dimen.msgView_textSize));
+        mMsgPadding = ta.getDimensionPixelSize(R.styleable.SegmentTabLayout_tl_tab_msg_padding, DensityUtil.dp2px(context, 2));
+        mMsgTextSize = ta.getDimension(R.styleable.SegmentTabLayout_tl_tab_msg_textSize, DensityUtil.sp2px(context, 10));
         ta.recycle();
     }
 
@@ -686,14 +687,21 @@ public class SegmentTabLayout extends FrameLayout implements ValueAnimator.Anima
         }
 
         View tabView = mTabsContainer.getChildAt(position);
-        MsgView tipView = tabView.findViewById(R.id.rtv_msg_tip);
-        if (tipView != null) {
-            tipView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mMsgTextSize);
-            UnreadMsgUtils.show(tipView, num);
+        FrameLayout msgView = tabView.findViewById(R.id.msg_layout);
+        if (msgView != null) {
+            msgView.setPadding(mMsgPadding, mMsgPadding, mMsgPadding, mMsgPadding);
+            if (num > 0) {
+                msgView.setVisibility(View.VISIBLE);
+                TextView tipView = tabView.findViewById(R.id.rtv_msg_tip);
+                tipView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mMsgTextSize);
+                UnreadMsgUtils.show(tipView, num);
+            } else {
+                msgView.setVisibility(View.GONE);
+            }
             if (mInitSetMap.get(position) != null && mInitSetMap.get(position)) {
                 return;
             }
-            setMsgMargin(position, 2, 2);
+//            setMsgMargin(position, 2, 2);
             mInitSetMap.put(position, true);
         }
     }
@@ -716,9 +724,9 @@ public class SegmentTabLayout extends FrameLayout implements ValueAnimator.Anima
         }
 
         View tabView = mTabsContainer.getChildAt(position);
-        MsgView tipView = tabView.findViewById(R.id.rtv_msg_tip);
-        if (tipView != null) {
-            tipView.setVisibility(View.GONE);
+        FrameLayout msgView = tabView.findViewById(R.id.msg_layout);
+        if (msgView != null) {
+            msgView.setVisibility(View.GONE);
         }
     }
 
@@ -732,26 +740,27 @@ public class SegmentTabLayout extends FrameLayout implements ValueAnimator.Anima
             position = mTabCount - 1;
         }
         View tabView = mTabsContainer.getChildAt(position);
-        MsgView tipView = tabView.findViewById(R.id.rtv_msg_tip);
-        if (tipView != null) {
+        FrameLayout msgView = tabView.findViewById(R.id.msg_layout);
+        if (msgView != null) {
             mTextPaint.setTextSize(mTextsize);
             float textHeight = mTextPaint.descent() - mTextPaint.ascent();
-            MarginLayoutParams lp = (MarginLayoutParams) tipView.getLayoutParams();
+            MarginLayoutParams lp = (MarginLayoutParams) msgView.getLayoutParams();
             lp.leftMargin = (int) leftPadding;
             lp.topMargin = (int) (mHeight > 0 ? (int) (mHeight - textHeight) / 2 - bottomPadding : bottomPadding);
-            tipView.setLayoutParams(lp);
+            msgView.setLayoutParams(lp);
         }
     }
 
     /**
      * 当前类只提供了少许设置未读消息属性的方法,可以通过该方法获取MsgView对象从而各种设置
      */
-    public MsgView getMsgView(int position) {
+    @Deprecated
+    public TextView getMsgView(int position) {
         if (position >= mTabCount) {
             position = mTabCount - 1;
         }
         View tabView = mTabsContainer.getChildAt(position);
-        return (MsgView) tabView.findViewById(R.id.rtv_msg_tip);
+        return tabView.findViewById(R.id.rtv_msg_tip);
     }
 
     private OnTabSelectListener mOnTabSelectListener;
